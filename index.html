@@ -3,18 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width">
-  <title>To do tasks</title>
+  <title>To-Do Tasks</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <style>
     h1 {
       text-align: center;
     }
+
     #t1 {
       padding: 10px;
       width: 70%;
       margin-bottom: 10px;
       margin-left: 10px;
     }
+
     #b1 {
       background-color: #007BFF;
       padding: 10px;
@@ -23,15 +25,25 @@
       margin-left: 10px;
       cursor: pointer;
     }
+
     #b1:hover {
       background-color: #0056b3;
     }
+    
+     ol {
+      
+      padding: 0;
+    }
+  
     li {
       display: flex;
+      align-items: center;
       justify-content: space-between;
       padding: 15px;
       border-bottom: 1px solid #ccc;
     }
+
+ 
   </style>
 </head>
 <body>
@@ -47,40 +59,31 @@
     const btn = document.getElementById("b1");
     const taskList = document.getElementById("taskList");
 
-    btn.addEventListener('click', function () {
+    btn.addEventListener("click", function () {
       const task = document.getElementById("t1").value;
 
       if (task) {
         const li = document.createElement("li");
 
-        // Directly set the text content of <li> to the task
-        li.textContent = task;
-        
-       li.addEventListener('click', function () {
-      li.style.textDecoration = "line-through"; 
-});
+        const tick = document.createElement("input");
+        tick.type = "checkbox";
+        li.appendChild(tick);
+
+         const textNode = document.createTextNode(task);
+        li.appendChild(textNode);
 
 
-        // Create and style the remove button
         const removeButton = document.createElement("button");
         removeButton.innerHTML = '<i class="fa fa-trash"></i>';
-        removeButton.style.color = "red";  // Corrected line
-        removeButton.style.border = "none";
-        removeButton.style.cursor = "pointer";
-        
-        // Append the remove button to the <li> element
+        removeButton.style.color="red";
         li.appendChild(removeButton);
 
-       
-        // Add event listener to the remove button to delete the task
-        removeButton.addEventListener("click", function () {
-          li.remove(); // This removes the entire <li> element
+               removeButton.addEventListener("click", function () {
+          li.remove();
         });
-        
-        
-         // Append the new list item to the task list
-        taskList.appendChild(li);
 
+       
+        taskList.appendChild(li);
 
         // Clear the input field after adding the task
         document.getElementById("t1").value = '';
